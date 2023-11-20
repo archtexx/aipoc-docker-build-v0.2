@@ -194,4 +194,4 @@ def listdocs(user_payload):
 if __name__ == '__main__': 
     # hostname = os.getenv("HOST_URL_IP")
     hostport = os.getenv("HOST_URL_IP_PORT")
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=hostport)
