@@ -30,36 +30,46 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-
-    def __init__(self, username, password):
-        self.username = username
+ 
+    def set_password(self, password):
         self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+ 
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    print("Entering login API call")
-    if request.method == 'GET':
-        return jsonify({"message": "Login successful"})
-    else:
-        print(request,"hello", request.json['email'])
-        u = request.json['email']
-        p = request.json['password']
 
-        # Find the user by username
-        user = User.query.filter_by(username=u).first()
-
-        if user and bcrypt.check_password_hash(user.password, p):
-            # Passwords match, log the user in
-            session['logged_in'] = True
+@app.route('/register', methods=['POST'])
+def register():
+    if request.method == 'POST':
+        u = request.json.get('email')
+        p = request.json.get('password')
+ 
+        existing_user = User.query.filter_by(username=u).first()
+        if existing_user:
             
-            response = jsonify({"message": "Login successful"})
-            response.status = 200
-            return response
-        else:
-            response = jsonify({"message": "Incorrect Details"})
-            response.status = 401
-            return response
+            return jsonify({"message": "Username already exists. Please choose a different one."}), 400
+ 
+        new_user = User(username=u)
+        new_user.set_password(p)
+        db.session.add(new_user)
+        db.session.commit()
+ 
+        return jsonify({"message": "Account created successfully! You can now log in."}), 200
 
+@app.route('/login', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        u = request.json.get('email')
+        p = request.json.get('password')
+ 
+        user = User.query.filter_by(username=u).first()
+ 
+        if user and user.check_password(p):
+            session['logged_in'] = True
+            return jsonify({"message": "Login successful"}), 200
+        else:
+            return jsonify({"message": "Invalid username or password"}), 401
+            
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['logged_in'] = False
