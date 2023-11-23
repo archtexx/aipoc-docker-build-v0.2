@@ -4,8 +4,8 @@
 * Install docker desktop - latest version based on the operating system
 
 ## Running the application 
-* Backend python application: docker run -p 5001:5001 jjayakeerthy/archtexx:doc_comparison_backend (on a new terminal window)
-* Frontend NextJS application: docker run -e NEXT_PUBLIC_BACKEND_URL=http://localhost:5001 -p 3001:3001 jjayakeerthy/archtexx:doc_comparison_frontend (on a new terminal window)
+* Backend python application: docker run -p 5001:5001 jjayakeerthy/archtexx:document_comparison_backend_v1.0 (on a new terminal window)
+* Frontend NextJS application: docker run -e NEXT_PUBLIC_BACKEND_URL=http://localhost:5001 -p 3001:3001 jjayakeerthy/archtexx:document_comparison_frontend_v1.0 (on a new terminal window)
 * To run the application: Go to browser and type the URL: http://localhost:3001
 
 ## Current limitations
