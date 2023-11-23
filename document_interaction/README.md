@@ -4,8 +4,8 @@
 * Install docker desktop - latest version based on the operating system
 
 ## Running the application 
-* Backend python application: docker run -p 5000:5000 jjayakeerthy/archtexx:doc_interactive_backend (on a new terminal window)
-* Frontend NextJS application: docker run -e NEXT_PUBLIC_BACKEND_URL=http://localhost:5000 -p 3000:3000 jjayakeerthy/archtexx:doc_interactive_frontend (on a new terminal window)
+* Backend python application: docker run -p 5000:5000 jjayakeerthy/archtexx:doc_interactive_backend_v1.0 (on a new terminal window)
+* Frontend NextJS application: docker run -e NEXT_PUBLIC_BACKEND_URL=http://localhost:5000 -p 3000:3000 jjayakeerthy/archtexx:doc_interactive_frontend_v1.0 (on a new terminal window)
 * To run the application: Go to browser and type the URL: http://localhost:3000 
 
 ## Important Points to Remember
