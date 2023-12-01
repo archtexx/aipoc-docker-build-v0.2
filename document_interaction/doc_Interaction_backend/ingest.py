@@ -43,8 +43,8 @@ embeddeployname=os.getenv("OPENAI_EMBEDdeployname")
 
 load_dotenv()
 
-chunk_size = 512
-chunk_overlap = 200
+chunk_size = 1024
+chunk_overlap = 0
 
 
 # Custom document loaders
